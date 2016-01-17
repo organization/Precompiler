@@ -1,0 +1,19 @@
+name: Precompiler
+main: Precompiler\Precompiler
+version: "v2"
+author: "hm"
+api:
+- 1.13.0
+- 2.0.0
+
+commands:
+ 생성:
+  default: OP
+ 실행:
+  default: OP
+ 올림:
+  default: OP
+ 내림:
+  default: OP
+ 추출:
+  default: OP

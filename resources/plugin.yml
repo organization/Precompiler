@@ -1,0 +1,26 @@
+#플러그인 이름을 뜻합니다.
+name: ExamplePlugin
+
+#플러그인의 메인클래스 위치를 적습니다.
+#src 폴더 아래의 주소(예 src\ ExampleAuthor\ExamplePlugin\Main .php)
+main: ExampleAuthor\ExamplePlugin\Main
+
+#플러그인 버전을 뜻합니다.
+version: 1.0-Alpha
+
+#개발자명을 뜻합니다.
+author: ExampleMaker
+
+#프로그램이 호환할 API를 뜻합니다.
+api:
+- 1.12.0
+- 1.13.0
+- 2.0.0
+
+#퍼미션 추가를 원할경우 #를 제거후 작업하시면 됩니다.
+#default: OP시 관리자만, true만 모든유저가 권한을 갖습니다.
+
+#permissions:
+# example:
+#  descript: "example permission"
+#  default: true
