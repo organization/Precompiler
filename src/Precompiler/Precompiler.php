@@ -76,9 +76,8 @@ class Precompiler extends PluginBase implements Listener {
 				$str = explode ( '?>', $str ) [0];
 			}
 		}
-		eval ( $str );
-		echo "\n";
-		$this->getLogger ()->info ( TextFormat::RED . "----- 테스트 코드가 종료되었습니다 -----" );
+		$task = new AsyncRunTask($str);
+		$this->getServer()->getAsyncPool()->submitTask($task);
 	}
 	
 	private function startsWith($haystack, $needle) {

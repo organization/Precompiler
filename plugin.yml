@@ -1,6 +1,6 @@
 name: Precompiler
 main: Precompiler\Precompiler
-version: "v2.1"
+version: "v2.2"
 author: 
 - "hm"
 - "organic"
