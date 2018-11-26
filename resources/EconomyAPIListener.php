@@ -8,7 +8,7 @@ use pocketmine\plugin\Plugin;
 use onebone\economyapi\event\money\AddMoneyEvent;
 use onebone\economyapi\event\money\ReduceMoneyEvent;
 use onebone\economyapi\event\money\SetMoneyEvent;
-use onebone\economyapi\event\bank\MoneyChangedEvent;
+use onebone\economyapi\event\money\MoneyChangedEvent;
 
 class EconomyAPIListener implements Listener {
 	private $economyAPI = null;

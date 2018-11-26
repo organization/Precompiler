@@ -30,7 +30,7 @@ class FolderPluginLoader implements PluginLoader {
 	 *
 	 * @return Plugin
 	 */
-	public function loadPlugin($file) {
+	public function loadPlugin($file) : void {
 		if (is_dir ( $file ) and file_exists ( $file . "/plugin.yml" ) and file_exists ( $file . "/src/" )) {
 			if (($description = $this->getPluginDescription ( $file )) instanceof PluginDescription) {
 				MainLogger::getLogger ()->info ( TextFormat::LIGHT_PURPLE . "소스형 플러그인을 불러옵니다 " . $description->getFullName () );
@@ -38,7 +38,7 @@ class FolderPluginLoader implements PluginLoader {
 				if (file_exists ( $dataFolder ) and ! is_dir ( $dataFolder )) {
 					trigger_error ( "Projected dataFolder '" . $dataFolder . "' for " . $description->getName () . " exists and is not a directory", E_USER_WARNING );
 					
-					return null;
+					return;
 				}
 				
 				$className = $description->getMain ();
@@ -48,16 +48,17 @@ class FolderPluginLoader implements PluginLoader {
 					$plugin = new $className ();
 					$this->initPlugin ( $plugin, $description, $dataFolder, $file );
 					
-					return $plugin;
+					//return $plugin;
+					return;
 				} else {
 					trigger_error ( "Couldn't load source plugin " . $description->getName () . ": main class not found", E_USER_WARNING );
 					
-					return null;
+					return;
 				}
 			}
 		}
 		
-		return null;
+		return;
 	}
 	
 	/**
@@ -67,7 +68,7 @@ class FolderPluginLoader implements PluginLoader {
 	 *
 	 * @return PluginDescription
 	 */
-	public function getPluginDescription($file) {
+	public function getPluginDescription($file) : ?PluginDescription {
 		if (is_dir ( $file ) and file_exists ( $file . DIRECTORY_SEPARATOR . "plugin.yml" )) {
 			$yaml = @file_get_contents ( $file . DIRECTORY_SEPARATOR . "plugin.yml" );
 			if ($yaml != "") {
@@ -126,6 +127,14 @@ class FolderPluginLoader implements PluginLoader {
 			$plugin->setEnabled ( false );
 		}
 	}
+	public function getAccessProtocol(): string {
+		return "";
+	}
+
+	public function canLoadPlugin(string $path): bool {
+		return is_dir($path) and file_exists($path . "/plugin.yml") and file_exists($path . "/src/");
+	}
+
 }
 
 ?>

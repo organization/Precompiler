@@ -18,12 +18,13 @@ class Precompiler extends PluginBase implements Listener {
 		$this->pluginLoader = new FolderPluginLoader ();
 		$this->getLogger()->info(TextFormat::DARK_AQUA . "명령어: (/생성 /올림 /내림 /추출)");
 		
-		$this->getServer ()->getPluginManager ()->registerInterface ( FolderPluginLoader::class );
+		$this->getServer ()->getPluginManager ()->registerInterface ( $this->pluginLoader );
 		$this->getServer ()->getPluginManager ()->registerEvents ( $this, $this );
 	}
-	public function onCommand(CommandSender $player, Command $command, $label, array $args) {
+	public function onCommand(CommandSender $player, Command $command, $label, array $args) : bool {
 		switch (strtolower ( $command->getName () )) {
 			case '실행' :
+			case 'run' :
 				$this->run ();
 				break;
 			case '올림' :

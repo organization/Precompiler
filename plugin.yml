@@ -1,10 +1,13 @@
 name: Precompiler
 main: Precompiler\Precompiler
-version: "v2"
-author: "hm"
+version: "v3"
+author: 
+- "hm"
+- "organic"
 api:
-- 1.13.0
-- 2.0.0
+- "3.0.0"
+- "3.1.0"
+- "4.0.0"   
 
 commands:
  생성:
@@ -16,4 +19,6 @@ commands:
  내림:
   default: OP
  추출:
+  default: OP
+ run:
   default: OP
