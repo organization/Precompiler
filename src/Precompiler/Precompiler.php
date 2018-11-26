@@ -66,12 +66,25 @@ class Precompiler extends PluginBase implements Listener {
 	public function run() {
 		$this->getLogger ()->info ( TextFormat::RED . "----- 테스트 코드가 실행되었습니다 -----" );
 		$str = file_get_contents ( $this->getServer ()->getDataPath () . 'localhost\run.php' );
-		$str = explode ( '<?php', $str ) [1];
-		$str = explode ( '?>', $str ) [0];
+		if ($this->startsWith ( $str, '<?' )) {
+			$result = explode ( '<?', $str );
+			if (count ( $result ) > 1) {
+				$str = $result[1];
+				if ($this->startsWith($str, 'php')) {
+					$str = substr($str, 3);
+				}
+				$str = explode ( '?>', $str ) [0];
+			}
+		}
 		eval ( $str );
 		echo "\n";
 		$this->getLogger ()->info ( TextFormat::RED . "----- 테스트 코드가 종료되었습니다 -----" );
 	}
+	
+	private function startsWith($haystack, $needle) {
+		return $needle === '' || strrpos($haystack, $needle, -strlen($haystack)) !== false;
+	}
+	
 	public function makePluginFile($author, $pluginName) {
 		@mkdir ( $pluginFolder = $this->getServer ()->getDataPath () . "localhost" . DIRECTORY_SEPARATOR . $pluginName . DIRECTORY_SEPARATOR );
 		@mkdir ( $resourceFolder = $pluginFolder . 'resources' . DIRECTORY_SEPARATOR );
